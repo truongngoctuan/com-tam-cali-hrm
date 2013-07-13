@@ -2,10 +2,10 @@
 ini_set('error_log', '/tmp/icehrm.log');
 
 define('CLIENT_NAME', 'app');
-define('APP_BASE_PATH', 'C:\wamp\www\icehrm/');
-define('CLIENT_BASE_PATH', 'C:\wamp\www\icehrm\app/');
-define('BASE_URL','http://localhost/icehrm/');
-define('CLIENT_BASE_URL','http://localhost/icehrm/app/');
+define('APP_BASE_PATH', 'C:\wamp\www\comtamcalihrm/');
+define('CLIENT_BASE_PATH', 'C:\wamp\www\comtamcalihrm\app/');
+define('BASE_URL','http://localhost/comtamcalihrm/');
+define('CLIENT_BASE_URL','http://localhost/comtamcalihrm/app/');
 
 define('APP_DB', 'comtamcali_hrm');
 define('APP_USERNAME', 'root');
