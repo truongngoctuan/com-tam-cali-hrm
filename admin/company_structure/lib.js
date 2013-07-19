@@ -22,20 +22,23 @@ CompanyStructureAdapter.method('getDataMapping', function() {
 });
 
 CompanyStructureAdapter.method('getHeaders', function() {
+	return foo2;
+	/*
 	return [
 			{ "sTitle": "ID","bVisible":false },
-			{ "sTitle": "Name" },
+			{ "sTitle": "Tên Chi Nhánh" },
 			{ "sTitle": "Address"},
 			{ "sTitle": "Type"},
 			{ "sTitle": "Country", "sClass": "center" },
 			{ "sTitle": "Parent Structure"}
 	];
+	*/
 });
 
 CompanyStructureAdapter.method('getFormFields', function() {
 	return [
 	        [ "id", {"label":"ID","type":"hidden","validation":""}],
-	        [ "title", {"label":"Name","type":"text","validation":""}],
+	        [ "title", {"label":"t\u00EAn","type":"text","validation":""}],
 	        [ "description", {"label":"Details","type":"textarea","validation":""}],
 	        [ "address", {"label":"Address","type":"textarea","validation":"none"}],
 	        [ "type", {"label":"Type","type":"select","source":[["Company","Company"],["Head Office","Head Office"],["Regional Office","Regional Office"],["Department","Department"],["Unit","Unit"],["Sub Unit","Sub Unit"],["Other","Other"]]}],
