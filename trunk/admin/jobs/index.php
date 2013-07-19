@@ -70,7 +70,7 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 	</div>
 
 </div>
-
+<script type="text/javascript" src="../admin/jobs/lib.js.php"></script>
 <script>
 
 var modJsList = new Array();
@@ -80,7 +80,7 @@ modJsList['tabChucVu'] = new ChucVuAdapter('ChucVu');
 modJsList['tabPayGrades'] = new PayGradeAdapter('PayGrade');
 modJsList['tabEmploymentStatus'] = new EmploymentStatusAdapter('EmploymentStatus');
 
-var modJs = modJsList['tabChucVu'];
+var modJs = modJsList['tabJobTitles'];
 
 </script>
 <?php include APP_BASE_PATH.'footer.php';?>      
