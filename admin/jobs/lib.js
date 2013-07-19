@@ -43,6 +43,42 @@ JobTitleAdapter.method('getFormFields', function() {
 
 
 /**
+ * ChucVuAdapter
+ */
+
+function ChucVuAdapter(endPoint) {
+	this.initAdapter(endPoint);
+}
+
+ChucVuAdapter.inherits(AdapterBase);
+
+
+
+ChucVuAdapter.method('getDataMapping', function() {
+	return [
+	        "id",
+	        "code",
+	        "name"
+	];
+});
+
+ChucVuAdapter.method('getHeaders', function() {
+	return [
+			{ "sTitle": "ID" ,"bVisible":false},
+			{ "sTitle": "Code" },
+			{ "sTitle": "Name" }
+	];
+});
+
+ChucVuAdapter.method('getFormFields', function() {
+	return [
+	        [ "id", {"label":"ID","type":"hidden"}],
+	        [ "code", {"label":"Code","type":"text"}],
+	        [ "name", {"label":"Name","type":"text"}]
+	];
+});
+
+/**
  * PayGradeAdapter
  */
 
