@@ -41,6 +41,10 @@ class JobTitle extends ADOdb_Active_Record {
 	var $_table = 'JobTitles';
 }
 
+class ChucVu extends ADOdb_Active_Record {
+	var $_table = 'chucvu';
+}
+
 class PayGrade extends ADOdb_Active_Record {
 	var $_table = 'PayGrades';
 }

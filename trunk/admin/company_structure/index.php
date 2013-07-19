@@ -89,6 +89,7 @@ var foo = <?php echo json_encode($a); ?>;
 			{ "sTitle": "Parent Structure"}
 	];
 	
+
 //alert(foo);
 </script>
 <?php include APP_BASE_PATH.'footer.php';?>      

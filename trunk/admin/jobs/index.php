@@ -28,7 +28,8 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 ?><div class="span9">
 			  
 	<ul class="nav nav-tabs" id="modTab" style="margin-bottom:0px;margin-left:5px;border-bottom: none;">
-		<li class="active"><a id="tabJobTitles" href="#tabPageJobTitles">Job Titles</a></li>
+		<li class="active"><a id="tabJobTitles" href="#tabPageJobTitles">Bộ phận</a></li>
+		<li><a id="tabChucVu" href="#tabPageChucVu">Chức vụ</a></li>
 		<li><a id="tabPayGrades" href="#tabPagePayGrades">Pay Grades</a></li>
 		<li><a id="tabEmploymentStatus" href="#tabPageEmploymentStatus">Employment Status</a></li>
 	</ul>
@@ -42,6 +43,14 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 		
 			</div>
 		</div>
+		<div class="tab-pane" id="tabPageChucVu">
+			<div id="ChucVu" class="reviewBlock" data-content="List" style="padding-left:5px;">
+		
+			</div>
+			<div id="ChucVuForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
+		
+			</div>
+		</div>		
 		<div class="tab-pane" id="tabPagePayGrades">
 			<div id="PayGrade" class="reviewBlock" data-content="List" style="padding-left:5px;">
 		
@@ -61,14 +70,17 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 	</div>
 
 </div>
+
 <script>
+
 var modJsList = new Array();
 
 modJsList['tabJobTitles'] = new JobTitleAdapter('JobTitle');
+modJsList['tabChucVu'] = new ChucVuAdapter('ChucVu');
 modJsList['tabPayGrades'] = new PayGradeAdapter('PayGrade');
 modJsList['tabEmploymentStatus'] = new EmploymentStatusAdapter('EmploymentStatus');
 
-var modJs = modJsList['tabJobTitles'];
+var modJs = modJsList['tabChucVu'];
 
 </script>
 <?php include APP_BASE_PATH.'footer.php';?>      

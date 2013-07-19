@@ -24,6 +24,7 @@ Country::SetDatabaseAdapter($dbLocal);
 Province::SetDatabaseAdapter($dbLocal);
 CurrencyType::SetDatabaseAdapter($dbLocal);
 JobTitle::SetDatabaseAdapter($dbLocal);
+ChucVu::SetDatabaseAdapter($dbLocal);
 PayGrade::SetDatabaseAdapter($dbLocal);
 EmploymentStatus::SetDatabaseAdapter($dbLocal);
 Skill::SetDatabaseAdapter($dbLocal);
