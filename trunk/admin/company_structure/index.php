@@ -25,6 +25,7 @@ $moduleName = 'company_structure';
 define('MODULE_PATH',__DIR__);
 include APP_BASE_PATH.'header.php';
 include APP_BASE_PATH.'modulejslibs.inc.php';
+
 ?>
 <script type="text/javascript" src="<?=BASE_URL.'js/raphael-min.js?v='.$jsVersion?>"></script>
 <script type="text/javascript" src="<?=BASE_URL.'js/graffle.js?v='.$jsVersion?>"></script>
@@ -40,6 +41,7 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 			<div id="CompanyStructure" class="reviewBlock" data-content="List" style="padding-left:5px;">
 		
 			</div>
+			<!-- this form is for cover the CompanyStructure for add a new one-->
 			<div id="CompanyStructureForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
 		
 			</div>
@@ -61,6 +63,32 @@ modJsList['tabCompanyStructure'] 	= new CompanyStructureAdapter('CompanyStructur
 modJsList['tabCompanyGraph'] = new CompanyGraphAdapter('CompanyStructure');
 
 var modJs = modJsList['tabCompanyStructure'];
-
+/*
+[
+			{ "sTitle": "ID","bVisible":false },
+			{ "sTitle": "Tên Chi Nhánh" },
+			{ "sTitle": "Address"},
+			{ "sTitle": "Type"},
+			{ "sTitle": "Country", "sClass": "center" },
+			{ "sTitle": "Parent Structure"}
+			
+				
+		*/	
+	<?php $a = Array(Array("sTitle"=> "ID","bVisible"=>false), "sTitle" => "Tên Chi Nhánh", "sTitle" => "Address", "sTitle" => "Type", Array("sTitle"=> "Country", "sClass"=> "center"), "sTitle" => "Parent Structure");
+			
+	
+?>
+		
+var foo = <?php echo json_encode($a); ?>;
+	var foo2 = [
+			{ "sTitle": "ID","bVisible":false },
+			{ "sTitle": <?php echo json_encode("Tên Chi Nhánh"); ?> },
+			{ "sTitle": "Address"},
+			{ "sTitle": "Type"},
+			{ "sTitle": "Country", "sClass": "center" },
+			{ "sTitle": "Parent Structure"}
+	];
+	
+//alert(foo);
 </script>
 <?php include APP_BASE_PATH.'footer.php';?>      
