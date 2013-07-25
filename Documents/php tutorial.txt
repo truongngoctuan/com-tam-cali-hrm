@@ -1,0 +1,16 @@
+how to install php into windows 8:
+http://support.microsoft.com/kb/2819022
+
+how to install phpmyadmin into windows 8:
+http://www.landpro.com.au/Windows_7_Install_PHPMyAdmin.php
+
+how to install eclipse and word-press
+http://www.youtube.com/watch?v=3SO3f4Zf-rc
+
+how to install Apache web server in windows
+http://www.youtube.com/watch?v=5gW4-gGxJlY&feature=youtu.be
+
+if we install xampp, we dont really need apachy, php, sql anymore, it already included
+
+WAMP (apache, php, mysql - myphpadmin,...) and eclipse 
+http://www.youtube.com/watch?v=-ywnEYxNGw8

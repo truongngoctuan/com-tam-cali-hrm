@@ -1,0 +1,51 @@
+﻿click vao 1 nhan vien --> show detail cua nhan vien do
+
+cach de add chuc nang vao navigation, cach de add 1 tab moi vao
+tao 1 chuc nang cho phep nhap 1 so thong tin: save into database, read it, load into form: nhap
+click dc de hien thong tin gi do!
+
+chức năng add, gọi hidden form: modJs.renderForm()
+
+modJs la gi? HRMBase
+có thể bỏ bớt 1 cái get ở foot.php
+$(document).ready(function() {
+			$('#modTab a').click(function (e) {
+				e.preventDefault();
+				$(this).tab('show');
+				modJs = modJsList[$(this).attr('id')];
+				modJs.get([]);
+			});
+
+			modJs.get([]); --> giảm đc 1 cái post nhưng chưa chăc chắn nó có ảnh hưởng gì ko.
+			
+modJs xem như là dữ liệu. gắn dữ liệu đó vào trang web như thế nào ??hàm createTable, get dât xon, lấy dât add vào html bằng hàm dataTable().
+
+jquery dataTable có thể tận dụng làm nhiều việc:
+	+sort, filter, paging, exporting basic data like csv data for excel, not format yet.
+	+custom cell: Custom cell format. For example, add link, and other things to fire a particular function
+	+editable 
+	+Integration with remote/server-side pages
+	
+sua:
+	+file html, javascript
+	+file lib.js trong cung thu muc
+	+file model
+	+file sẻvice
+	
+de ket noi voi server, dung post nhu sau:
+AdapterBase.method('add', function(object,callBackData) {
+	var that = this;
+	$(object).attr('a','add');
+	$(object).attr('t',this.table);
+	$.post(this.moduleRelativeURL, object, function(data) {
+		if(data.status == "SUCCESS"){
+			that.addSuccessCallBack(callBackData,data.object);
+		}else{
+			that.addFailCallBack(callBackData,data.object);
+		}
+	},"json");
+});
+
+no se ket noi voi service trong file "service.php"
+
+
