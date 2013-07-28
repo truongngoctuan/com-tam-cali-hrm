@@ -117,6 +117,6 @@ foreach($userModulesTemp as $k=>$v){
 	}
 }
 
-//error_log("Admin Modules :".print_r($adminModules,true));
+error_log("Admin Modules :".print_r($adminModules,true));
 //error_log("User Modules :".print_r($userModules,true));
 
