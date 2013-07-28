@@ -185,4 +185,18 @@ class Setting extends ADOdb_Active_Record {
 	var $_table = 'Settings';
 }
 
+class ChiNhanh extends ADOdb_Active_Record {
+	var $_table = 'CHI_NHANH';
+}
 
+class Ca extends ADOdb_Active_Record {
+	var $_table = 'CA';
+}
+
+class BoPhan extends ADOdb_Active_Record {
+	var $_table = 'BO_PHAN';
+}
+
+class Nguon extends ADOdb_Active_Record {
+	var $_table = 'NGUON';
+}

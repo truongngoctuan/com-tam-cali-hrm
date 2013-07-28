@@ -1,1 +1,63 @@
-﻿
+﻿<li class="active"><a id="tabNguon" href="#tabNguon">Nguồn tuyển dụng</a></li>
+--------------------------------------------------------------------------------------------
+		<div class="tab-pane active" id="tabPageNguon">
+			<div id="Nguon" class="reviewBlock" data-content="List" style="padding-left:5px;">
+		
+			</div>
+			<div id="NguonForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
+		
+			</div>
+		</div>
+--------------------------------------------------------------------------------------------
+<li><a id="tabNguon" href="#tabNguon">Nguồn tuyển dụng</a></li>
+--------------------------------------------------------------------------------------------
+		<div class="tab-pane" id="tabPageNguon">
+			<div id="Nguon" class="reviewBlock" data-content="List" style="padding-left:5px;">
+		
+			</div>
+			<div id="NguonForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
+		
+			</div>
+		</div>
+--------------------------------------------------------------------------------------------
+modJsList['tabNguon'] = new NguonAdapter('Nguon');
+--------------------------------------------------------------------------------------------
+/**
+ * NguonAdapter
+ */
+
+function NguonAdapter(endPoint) {
+	this.initAdapter(endPoint);
+}
+
+NguonAdapter.inherits(AdapterBase);
+
+NguonAdapter.method('getDataMapping', function() {
+	return [
+	        "MA",
+	        "TEN",
+			"DIEN_GIAI"
+	];
+});
+
+NguonAdapter.method('getHeaders', function() {
+	return [
+			{ "sTitle": "ID" ,"bVisible":false},
+			{ "sTitle": "T\u00ean" },
+			{ "sTitle": "Nguon tuyen dung" }
+	];
+});
+
+NguonAdapter.method('getFormFields', function() {
+	return [
+	        [ "MA", {"label":"ID","type":"hidden"}],
+	        [ "TEN", {"label":"T\u00ean","type":"text"}],
+			[ "DIEN_GIAI", {"label":"nguon","type":"text"}]
+	];
+});
+--------------------------------------------------------------------------------------------
+class Nguon extends ADOdb_Active_Record {
+	var $_table = 'NGUON';
+}
+--------------------------------------------------------------------------------------------
+Nguon::SetDatabaseAdapter($dbLocal);

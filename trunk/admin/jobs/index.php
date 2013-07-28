@@ -70,7 +70,7 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 	</div>
 
 </div>
-<script type="text/javascript" src="../admin/jobs/lib.js.php"></script>
+
 <script>
 
 var modJsList = new Array();

@@ -1,3 +1,11 @@
-﻿Mã
-Chức vụ
-
+﻿Chi nhánh
+Bộ phận
+Nguồn tuyển dụng
+Loại ngày
+Mã
+Tên
+Diễn giải
+Tên ngắn
+Tên dài
+Địa chỉ
+Điện thoại
