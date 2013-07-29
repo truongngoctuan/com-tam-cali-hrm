@@ -193,10 +193,18 @@ class Ca extends ADOdb_Active_Record {
 	var $_table = 'CA';
 }
 
+class Ca22 extends ADOdb_Active_Record {
+	var $_table = 'CA22';
+}
+
 class BoPhan extends ADOdb_Active_Record {
 	var $_table = 'BO_PHAN';
 }
 
 class Nguon extends ADOdb_Active_Record {
 	var $_table = 'NGUON';
+}
+
+class LoaiNgay extends ADOdb_Active_Record {
+	var $_table = 'LOAI_NGAY';
 }

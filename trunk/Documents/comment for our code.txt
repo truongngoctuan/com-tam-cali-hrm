@@ -47,18 +47,8 @@ AdapterBase.method('add', function(object,callBackData) {
 });
 
 no se ket noi voi service trong file "service.php"
+dựa trên action, chọn function cần gọi trong classes > BaseService
 
-
-Chi nh\u00e1nh
-B\u1ed9 ph\u1eadn
-Ngu\u1ed3n tuy\u1ec3n d\u1ee5ng
-Lo\u1ea1i ng\u00e0y
-M\u00e3
-T\u00ean
-Di\u1ec5n gi\u1ea3i
-T\u00ean ng\u1eafn
-T\u00ean d\u00e0i
-\u0110\u1ecba ch\u1ec9
-\u0110i\u1ec7n tho\u1ea1i
+trong DeleteObject, delete object có id = ? --> cần sửa lại tối ưu hơn.
 
 
