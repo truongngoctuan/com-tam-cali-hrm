@@ -60,10 +60,13 @@ EmployeeDocument::SetDatabaseAdapter($dbLocal);
 CompanyLoan::SetDatabaseAdapter($dbLocal);
 EmployeeCompanyLoan::SetDatabaseAdapter($dbLocal);
 Setting::SetDatabaseAdapter($dbLocal);
+
 ChiNhanh::SetDatabaseAdapter($dbLocal);
 Ca::SetDatabaseAdapter($dbLocal);
+Ca22::SetDatabaseAdapter($dbLocal);
 BoPhan::SetDatabaseAdapter($dbLocal);
 Nguon::SetDatabaseAdapter($dbLocal);
+LoaiNgay::SetDatabaseAdapter($dbLocal);
 
 $baseService = new BaseService();
 $baseService->setNonDeletables("User", "id", 1);

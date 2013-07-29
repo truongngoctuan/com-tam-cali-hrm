@@ -9,3 +9,5 @@ Tên ngắn
 Tên dài
 Địa chỉ
 Điện thoại
+Nhập liệu chung
+Quản lý nhân viên

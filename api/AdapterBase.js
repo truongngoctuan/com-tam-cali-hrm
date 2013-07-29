@@ -95,6 +95,7 @@ AdapterBase.method('addFailCallBack', function(callBackData,serverData) {
 });
 
 AdapterBase.method('deleteObj', function(id,callBackData) {
+	//alert('deleteObj');
 	var that = this;
 	$.post(this.moduleRelativeURL, {'t':this.table,'a':'delete','id':id}, function(data) {
 		if(data.status == "SUCCESS"){
