@@ -1,43 +1,89 @@
 /**
  * Author: Thilina Hasantha
  */
+ 
  /**
- * ChiNhanhAdapter
+ * NhanVienAdapter
  */
 
-function ChiNhanhAdapter(endPoint) {
+function NhanVienAdapter(endPoint) {
 	this.initAdapter(endPoint);
 }
 
-ChiNhanhAdapter.inherits(AdapterBase);
+NhanVienAdapter.inherits(AdapterBase);
 
-ChiNhanhAdapter.method('getDataMapping', function() {
+NhanVienAdapter.method('getDataMapping', function() {
 	return [
 	        "MA",
-	        "TEN_NGAN",
-			"TEN_DAI",
-			"DIA_CHI",
-			"DIEN_THOAI"
+			"MA_BP",
+			"MA_NGUON",
+			"MA_CN",
+			"MA_NV_STATE",
+			"NGAY_PHONG_VAN",
+			"NGAY_VAO_LAM",
+			"LY_DO_KHONG_NHAN",
+			"B_KINH_NGHIEM",
+			"GHI_CHU_NHAN_NV",
+			"MA_NV_CHINH_THUC",
+			"NGAY_SINH",
+			"DIA_CHI_HIEN_TAI",
+			"HO_KHAU",
+			"SDT",
+			"CMND",
+			"NGAY_CAP",
+			"NOI CAP",
+			"HO_SO",
+			"GHI_CHU"
 	];
 });
 
-ChiNhanhAdapter.method('getHeaders', function() {
+NhanVienAdapter.method('getHeaders', function() {
 	return [
-			{ "sTitle": "ID" ,"bVisible":false},
-			{ "sTitle": "T\u00ean ng\u1eafn" },
-			{ "sTitle": "T\u00ean d\u00e0i" },
+			{ "sTitle": "M\u00e3", "bVisible":false},
+			{ "sTitle": "MA_BP" },
+			{ "sTitle": "MA_NGUON" },
+			{ "sTitle": "MA_CN" },
+			{ "sTitle": "MA_NV_STATE" },
+			{ "sTitle": "Ng\u00e0y ph\u1ecfng v\u1ea5n" },
+			{ "sTitle": "Ng\u00e0y v\u00e0o l\u00e0m" },
+			{ "sTitle": "L\u00fd do kh\u00f4ng nh\u1eadn" },
+			{ "sTitle": "C\u00f3 kinh nghi\u1ec7m" },
+			{ "sTitle": "Ghi ch\u00fa" },
+			{ "sTitle": "Ghi ch\u00fa nh\u1eadn" },
+			{ "sTitle": "M\u00e3 NV" },
+			{ "sTitle": "Ng\u00e0y sinh" },
 			{ "sTitle": "\u0110\u1ecba ch\u1ec9" },
-			{ "sTitle": "\u0110i\u1ec7n tho\u1ea1i" }
+			{ "sTitle": "H\u1ed9 kh\u1ea9u" },
+			{ "sTitle": "SDT" },
+			{ "sTitle": "CMND" },
+			{ "sTitle": "Ng\u00e0y c\u1ea5p" },
+			{ "sTitle": "H\u1ed3 s\u01a1" },
+			{ "sTitle": "Ghi ch\u00fa" }
 	];
 });
 
-ChiNhanhAdapter.method('getFormFields', function() {
+NhanVienAdapter.method('getFormFields', function() {
 	return [
 	        [ "MA", {"label":"ID","type":"hidden"}],
-	        [ "TEN_NGAN", {"label":"T\u00ean ng\u1eafn","type":"text"}],
-			[ "TEN_DAI", {"label":"T\u00ean d\u00e0i","type":"text"}],
-			[ "DIA_CHI", {"label":"\u0110\u1ecba ch\u1ec9","type":"text"}],
-			[ "DIEN_THOAI", {"label":"\u0110i\u1ec7n tho\u1ea1i","type":"text"}]
+			[ "MA_BP", {"label":"MA_BP","type":"select","remote-source":["BoPhan","MA","TEN"]}],
+			[ "MA_NGUON", {"label":"MA_NGUON","type":"select","remote-source":["Nguon","MA","TEN"]}],
+			[ "MA_CN", {"label":"MA_CN","type":"select","remote-source":["ChiNhanh","MA","TEN_NGAN"]}],
+			[ "MA_NV_STATE", {"label":"MA_NV_STATE","type":"select","remote-source":["NVState","MA","TEN"]}],
+			[ "NGAY_PHONG_VAN", {"label":"Ng\u00e0y ph\u1ecfng v\u1ea5n","type":"date","validation":""}],
+			[ "NGAY_VAO_LAM", {"label":"Ng\u00e0y v\u00e0o l\u00e0m","type":"date","allow-null":true,"validation":"none"}],
+			[ "LY_DO_KHONG_NHAN", {"label":"L\u00fd do kh\u00f4ng nh\u1eadn","type":"text","allow-null":true,"validation":"none"}],
+			[ "B_KINH_NGHIEM", {"label":"C\u00f3 kinh nghi\u1ec7m","type":"text"}],
+			[ "GHI_CHU_NHAN_NV", {"label":"Ghi ch\u00fa nh\u1eadn","type":"text","allow-null":true,"validation":"none"}],
+			[ "MA_NV_CHINH_THUC", {"label":"M\u00e3 NV","type":"text","allow-null":true,"validation":"none"}],
+			[ "NGAY_SINH", {"label":"Ng\u00e0y sinh","type":"date","validation":""}],
+			[ "DIA_CHI_HIEN_TAI", {"label":"\u0110\u1ecba ch\u1ec9","type":"text","allow-null":true,"validation":"none"}],
+			[ "HO_KHAU", {"label":"H\u1ed9 kh\u1ea9u","type":"text","allow-null":true,"validation":"none"}],
+			[ "SDT", {"label":"SDT","type":"text","allow-null":true,"validation":"none"}],
+			[ "CMND", {"label":"CMND","type":"text","allow-null":true,"validation":"none"}],
+			[ "NGAY_CAP", {"label":"Ng\u00e0y c\u1ea5p","type":"date","allow-null":true,"validation":"none"}],
+			[ "NOI CAP", {"label":"Nơi cấp","type":"text","allow-null":true,"validation":"none"}],
+			[ "HO_SO", {"label":"H\u1ed3 s\u01a1","type":"text","allow-null":true,"validation":"none"}],
+			[ "GHI_CHU", {"label":"Ghi ch\u00fa","type":"text","allow-null":true,"validation":"none"}]
 	];
 });
 

@@ -219,3 +219,7 @@ class LoaiNgay extends BaseDateVN {
 class NVState extends BaseDateVN {
 	var $_table = 'NV_STATE';
 }
+
+class NhanVien extends BaseDateVN {
+	var $_table = 'NHAN_VIEN';
+}

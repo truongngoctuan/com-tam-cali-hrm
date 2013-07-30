@@ -32,16 +32,16 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 <div class="span9">
 			  
 	<ul class="nav nav-tabs" id="modTab" style="margin-bottom:0px;margin-left:5px;border-bottom: none;">
-		<li class="active"><a id="tabChiNhanh" href="#tabPageChiNhanh">Chi nhánh</a></li>
+		<li class="active"><a id="tabNhanVien" href="#tabPageNhanVien">Thêm nhân viên</a></li>
 		<li><a id="tabNVState" href="#tabPageNVState">Tình trạng nhân viên</a></li>
 	</ul>
 	 
 	<div class="tab-content">
-		<div class="tab-pane active" id="tabPageChiNhanh">
-			<div id="ChiNhanh" class="reviewBlock" data-content="List" style="padding-left:5px;">
+		<div class="tab-pane active" id="tabPageNhanVien">
+			<div id="NhanVien" class="reviewBlock" data-content="List" style="padding-left:5px;">
 		
 			</div>
-			<div id="ChiNhanhForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
+			<div id="NhanVienForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
 		
 			</div>
 		</div>
@@ -59,9 +59,9 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 <script>
 var modJsList = new Array();
 
-modJsList['tabChiNhanh'] = new ChiNhanhAdapter('ChiNhanh');
+modJsList['tabNhanVien'] = new NhanVienAdapter('NhanVien');
 modJsList['tabNVState'] = new NVStateAdapter('NVState');
 
-var modJs = modJsList['tabChiNhanh'];
+var modJs = modJsList['tabNhanVien'];
 </script>
 <?php include APP_BASE_PATH.'footer.php';?>      
