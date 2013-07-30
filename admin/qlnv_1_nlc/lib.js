@@ -42,32 +42,32 @@ ChiNhanhAdapter.method('getFormFields', function() {
 });
 
 /**
- * Ca22Adapter
+ * CaAdapter
  */
 
-function Ca22Adapter(endPoint) {
+function CaAdapter(endPoint) {
 	this.initAdapter(endPoint);
 }
 
-Ca22Adapter.inherits(AdapterBase);
+CaAdapter.inherits(AdapterBase);
 
 
 
-Ca22Adapter.method('getDataMapping', function() {
+CaAdapter.method('getDataMapping', function() {
 	return [
 	        "MA",
 	        "TEN"
 	];
 });
 
-Ca22Adapter.method('getHeaders', function() {
+CaAdapter.method('getHeaders', function() {
 	return [
 			{ "sTitle": "ID" ,"bVisible":false},
 			{ "sTitle": "T\u00ean" }
 	];
 });
 
-Ca22Adapter.method('getFormFields', function() {
+CaAdapter.method('getFormFields', function() {
 	return [
 	        [ "MA", {"label":"ID","type":"hidden"}],
 	        [ "TEN", {"label":"T\u00ean","type":"text"}]

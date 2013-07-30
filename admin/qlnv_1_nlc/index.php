@@ -2,7 +2,7 @@
 /*
 This file is part of iCE Hrm.
 
-iCE Hrm is free software: you Ca22n redistribute it and/or modify
+iCE Hrm is free software: you Can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
@@ -33,7 +33,7 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 			  
 	<ul class="nav nav-tabs" id="modTab" style="margin-bottom:0px;margin-left:5px;border-bottom: none;">
 		<li class="active"><a id="tabChiNhanh" href="#tabPageChiNhanh">Chi nhánh</a></li>
-		<li><a id="tabCa22" href="#tabPageCa22">Ca22</a></li>
+		<li><a id="tabCa" href="#tabPageCa">Ca</a></li>
 		<li><a id="tabBoPhan" href="#tabPageBoPhan">Bộ phận</a></li>
 		
 		<li><a id="tabNguon" href="#tabPageNguon">Nguồn tuyển dụng</a></li>
@@ -49,11 +49,11 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 		
 			</div>
 		</div>
-		<div class="tab-pane" id="tabPageCa22">
-			<div id="Ca22" class="reviewBlock" data-content="List" style="padding-left:5px;">
+		<div class="tab-pane" id="tabPageCa">
+			<div id="Ca" class="reviewBlock" data-content="List" style="padding-left:5px;">
 		
 			</div>
-			<div id="Ca22Form" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
+			<div id="CaForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
 		
 			</div>
 		</div>
@@ -89,7 +89,7 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 var modJsList = new Array();
 
 modJsList['tabChiNhanh'] = new ChiNhanhAdapter('ChiNhanh');
-modJsList['tabCa22'] = new Ca22Adapter('Ca22');
+modJsList['tabCa'] = new CaAdapter('Ca');
 modJsList['tabBoPhan'] = new BoPhanAdapter('BoPhan');
 
 modJsList['tabNguon'] = new NguonAdapter('Nguon');
