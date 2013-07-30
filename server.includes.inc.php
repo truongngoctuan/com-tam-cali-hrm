@@ -66,6 +66,7 @@ Ca::SetDatabaseAdapter($dbLocal);
 BoPhan::SetDatabaseAdapter($dbLocal);
 Nguon::SetDatabaseAdapter($dbLocal);
 LoaiNgay::SetDatabaseAdapter($dbLocal);
+NVState::SetDatabaseAdapter($dbLocal);
 
 $baseService = new BaseService();
 $baseService->setNonDeletables("User", "id", 1);
