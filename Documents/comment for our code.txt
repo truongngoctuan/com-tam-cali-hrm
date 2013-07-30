@@ -1,12 +1,4 @@
-﻿click vao 1 nhan vien --> show detail cua nhan vien do
-
-cach de add chuc nang vao navigation, cach de add 1 tab moi vao
-tao 1 chuc nang cho phep nhap 1 so thong tin: save into database, read it, load into form: nhap
-click dc de hien thong tin gi do!
-
-chức năng add, gọi hidden form: modJs.renderForm()
-
-modJs la gi? HRMBase
+﻿modJs la gi? HRMBase
 có thể bỏ bớt 1 cái get ở foot.php
 $(document).ready(function() {
 			$('#modTab a').click(function (e) {
