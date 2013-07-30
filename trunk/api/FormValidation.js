@@ -151,6 +151,12 @@ FormValidation.method('checkValues' , function(options) {
 	    var name = inputObject.attr("name");
 	    var type = inputObject.attr("type");
 		
+		if (type == "hidden") {
+			$valueOfhidden = inputObject.val();
+			$(that.formObject).attr(id,$valueOfhidden);
+			//alert($valueOfhidden);
+		}
+				
 	    if(jQuery.inArray(type, that.inputTypes ) >= 0) {
 		    inputValue = (type == "radio" || type == "checkbox")?$("input[name='" + name + "']:checked").val():inputObject.val();
 		    var validation = inputObject.attr('validation');
@@ -189,6 +195,8 @@ FormValidation.method('checkValues' , function(options) {
     	var that = $(this);
     	validate(that);
     });
+	
+	
 
     this.showErrors();
     this.tempOptions = {};

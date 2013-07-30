@@ -63,7 +63,6 @@ Setting::SetDatabaseAdapter($dbLocal);
 
 ChiNhanh::SetDatabaseAdapter($dbLocal);
 Ca::SetDatabaseAdapter($dbLocal);
-Ca22::SetDatabaseAdapter($dbLocal);
 BoPhan::SetDatabaseAdapter($dbLocal);
 Nguon::SetDatabaseAdapter($dbLocal);
 LoaiNgay::SetDatabaseAdapter($dbLocal);

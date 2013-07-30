@@ -187,22 +187,27 @@ class BaseService{
 	
 	public function getElement($table,$id,$mappingStr = null){
 		$obj = new $table();
-		
+		//echo($obj->PrimaryKeyName());
 		if(in_array($table, $this->userTables)){
 			$cemp = $this->getCurrentEmployeeId();
 			if(!empty($cemp)){
-				$obj->Load("id = ?", array($id));	
+				$obj->Load($obj->PrimaryKeyName().' = ?', array($id));	
 			}else{
 			}
-					
+			//echo('asd');		
 		}else{
-			$obj->Load("id = ?",array($id));
+			$obj->Load($obj->PrimaryKeyName().' = ?',array($id));
+			//echo('asd2');
 		}
 		
 		if(!empty($mappingStr)){
 			$map = json_decode($mappingStr);	
 		}
-		if($obj->id == $id){
+		//echo('asd3');
+		//print_r($obj);
+		$PrimaryKeyName = $obj->PrimaryKeyName();
+		if($obj->$PrimaryKeyName == $id){
+			//echo('asd4');
 			if(!empty($mappingStr)){
 				foreach($map as $k=>$v){
 					$fTable = $v[0];
@@ -228,11 +233,45 @@ class BaseService{
 			}
 			return 	$obj;
 		}
+		//echo('asd10');
 		return null;
 	}
 	
 	public function addElement($table,$obj){
 		$ele = new $table();
+		$PrimaryKeyName = $ele->PrimaryKeyName();
+		
+		if(!empty($obj[$PrimaryKeyName])){
+			//echo('asd');
+			$ele->Load($PrimaryKeyName.' = ?',array($obj[$PrimaryKeyName]));	
+		}
+		//print_r($ele);
+		foreach($obj as $k=>$v){
+			if($k == $PrimaryKeyName || $k == 't' || $k == 'a'){
+				continue;	
+			}
+			if($v == "NULL"){
+				$v = null;	
+			}
+			$ele->$k = $v;	
+		}
+		if(empty($obj[$PrimaryKeyName])){	
+			if(in_array($table, $this->userTables)){
+				$cemp = $this->getCurrentEmployeeId();
+				if(!empty($cemp)){
+					$ele->employee = $cemp;	
+				}else{
+					return "Employee id is not set";
+				}		
+			}
+		}
+		$ok = $ele->Save();
+		if(!$ok){
+			error_log($ele->ErrorMsg());
+			return $this->findError($ele->ErrorMsg());		
+		}
+		return $ele;
+		/*
 		if(!empty($obj['id'])){
 			$ele->Load('id = ?',array($obj['id']));	
 		}
@@ -262,12 +301,14 @@ class BaseService{
 			return $this->findError($ele->ErrorMsg());		
 		}
 		return $ele;
+		*/
 	}
 	
 	public function deleteElement($table,$id){
-		
 		$ele = new $table();
-		$ele->Load('id = ?',array($id));	
+		//$ele->Load('id = ?',array($id));
+		//echo ($ele->PrimaryKeyName());
+		$ele->Load($ele->PrimaryKeyName().' = ?',array($id));	
 		$nonDeletableTable = $this->nonDeletables[$table];
 		if(!empty($nonDeletableTable)){
 			foreach($nonDeletableTable as $field => $value){

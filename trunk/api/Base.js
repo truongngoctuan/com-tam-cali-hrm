@@ -314,6 +314,7 @@ IceHRMBase.method('save', function() {
 		var params = validator.getFormParameters();
 		
 		var msg = this.doCustomValidation(params);
+		//alert(params);
 		if(msg == null){
 			var id = $('#'+this.getTableName()+"_submit #id").val();
 			if(id != null && id != undefined && id != ""){

@@ -46,8 +46,10 @@ if(!file_exists($logoFileName)){
 
     <!-- Le styles -->
     <link href="<?=BASE_URL?>bootstrap/css/bootstrap.css" rel="stylesheet">
-	
+	<!--
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.js"></script>
+	-->
+	<script type="text/javascript" src="<?=BASE_URL?>jquery.js"></script>
     <script src="<?=BASE_URL?>bootstrap/js/bootstrap.js"></script>
 	<script src="<?=BASE_URL?>js/jquery.placeholder.js"></script>
 	<script src="<?=BASE_URL?>js/jquery.dataTables.js"></script>
@@ -64,9 +66,14 @@ if(!file_exists($logoFileName)){
       <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     
+	<!--
     <script type="text/javascript" src="https://webstalk-js.s3.amazonaws.com/date.js"></script>
 	<script type="text/javascript" src="https://webstalk-js.s3.amazonaws.com/json2.js"></script>
 	<script type="text/javascript" src="https://webstalk-js.s3.amazonaws.com/CrockfordInheritance.v0.1.js"></script>
+-->
+<script type="text/javascript" src="<?=BASE_URL?>webstalk/date.js"></script>
+	<script type="text/javascript" src="<?=BASE_URL?>webstalk/json2.js"></script>
+	<script type="text/javascript" src="<?=BASE_URL?>webstalk/CrockfordInheritance.v0.1.js"></script>
 
 	<script type="text/javascript" src="<?=BASE_URL?>api/Base.js?v=<?=$jsVersion?>"></script>
 	<script type="text/javascript" src="<?=BASE_URL?>api/AdapterBase.js?v=<?=$jsVersion?>"></script>
@@ -85,14 +92,22 @@ if(!file_exists($logoFileName)){
 	</script>
 	<?php include APP_BASE_PATH.'js/bootstrapDataTable.php';?>
 	
-	
+	<!--
 	<link rel="stylesheet" href="https://webstalk-js.s3.amazonaws.com/tp/lightface/css/LightFace.css?v=0.1" />
 	<script src="https://ajax.googleapis.com/ajax/libs/mootools/1.3.0/mootools.js"></script>
+	
 	<script src="https://webstalk-js.s3.amazonaws.com/tp/lightface/LightFace.js"></script>
 	<script src="https://webstalk-js.s3.amazonaws.com/tp/lightface/LightFace.js"></script>
 	<script src="https://webstalk-js.s3.amazonaws.com/tp/lightface/LightFace.IFrame.js"></script>
 	<script src="https://webstalk-js.s3.amazonaws.com/tp/lightface/LightFace.Image.js"></script>
 	<script src="https://webstalk-js.s3.amazonaws.com/tp/lightface/LightFace.Request.js"></script>
+	-->
+	<link rel="stylesheet" href="<?=BASE_URL?>webstalk/lightface/LightFace.css" />
+	<script type="text/javascript" src="<?=BASE_URL?>mootools.js"></script>
+	<script type="text/javascript" src="<?=BASE_URL?>webstalk/lightface/LightFace.js"></script>
+	<script type="text/javascript" src="<?=BASE_URL?>webstalk/lightface/LightFace.IFrame.js"></script>
+	<script type="text/javascript" src="<?=BASE_URL?>webstalk/lightface/LightFace.Image.js"></script>
+	<script type="text/javascript" src="<?=BASE_URL?>webstalk/lightface/LightFace.Request.js"></script>
 	
   </head>
 
