@@ -50,6 +50,9 @@ if(!file_exists($logoFileName)){
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.js"></script>
 	-->
 	<script type="text/javascript" src="<?=BASE_URL?>jquery.js"></script>
+	<script type="text/javascript" src="<?=BASE_URL?>UtilitiesFunction.js"></script>
+	<script src="<?=BASE_URL?>js/jquery.jeditable.mini.js"></script>
+	
     <script src="<?=BASE_URL?>bootstrap/js/bootstrap.js"></script>
 	<script src="<?=BASE_URL?>js/jquery.placeholder.js"></script>
 	<script src="<?=BASE_URL?>js/jquery.dataTables.js"></script>

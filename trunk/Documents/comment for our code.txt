@@ -1,4 +1,13 @@
-﻿modJs la gi? HRMBase
+﻿ve ra giao dien cua chuc nang
+liet ke cac chuc nang can co cho service
+lam service
+lay du lieu tu service load into dataTable
+table Editable, when data is edited --> update it by sending to server
+build a sum row for this table when load
+after edit successfully, update sum rows.
+
+
+modJs la gi? HRMBase
 có thể bỏ bớt 1 cái get ở foot.php
 $(document).ready(function() {
 			$('#modTab a').click(function (e) {

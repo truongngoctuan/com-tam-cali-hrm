@@ -166,7 +166,7 @@ IceHRMBase.method('callFunction', function (callback, cbParams) {
 
 
 IceHRMBase.method('createTable', function(elementId) {
-	
+	//alert('IceHRMBase.createTable');
 	if(this.getRemoteTable()){
 		this.createTableServer(elementId);
 		return;
@@ -181,6 +181,8 @@ IceHRMBase.method('createTable', function(elementId) {
 	for(var i=0;i<data.length;i++){
 		data[i].push(this.getActionButtonsHtml(data[i][0],data[i]));
 	}
+	debugging('headers', headers);
+	debugging('data', data);
 	var html = "";
 	if(this.getShowAddNew()){
 		html = '<button style="float:right;" onclick="modJs.renderForm();return false;" class="btn btn-small">Add New <span class="icon-plus-sign"></span></button><table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="grid"></table>';
@@ -211,6 +213,7 @@ IceHRMBase.method('createTable', function(elementId) {
 });
 
 IceHRMBase.method('createTableServer', function(elementId) {
+	alert('IceHRMBase.createTableServer');
 	var that = this;
 	var headers = this.getHeaders();
 	var data = this.getTableData();
@@ -478,7 +481,7 @@ IceHRMBase.method('getActionButtons', function(obj) {
 });
 
 IceHRMBase.method('getActionButtonsHtml', function(id,data) {
-	var html = '<div style="width:80px;"><img class="tableActionButton" src="_BASE_images/edit.png" style="cursor:pointer;" rel="tooltip" title="Edit" onclick="modJs.edit(_id_);return false;"></img><img class="tableActionButton" src="_BASE_images/delete.png" style="margin-left:15px;cursor:pointer;" rel="tooltip" title="Delete" onclick="modJs.deleteRow(_id_);return false;"></img></div>';
+	var html = '<div style="width:80px;"><img class="tableActionButton" src="_BASE_images/edit.png" style="cursor:pointer;" rel="tooltip" title="Edit" onclick="modJs.edit(_id_);return false;"></img><img class="tableActionButton" src="_BASE_images/delete.png" style="margin-left:15px;cursor:pointer;" rel="tooltip" title="Delete" onclick="modJs.deleteRow(_id_);return false;"></img><div value="3" id="MA"></div></div>';
 	html = html.replace(/_id_/g,id);
 	html = html.replace(/_BASE_/g,this.baseUrl);
 	return html;
