@@ -73,7 +73,7 @@ class BaseService{
 		}
 		//error_log('hdhgdhg', 3, "/error.log");
 		//error_log("Base Oracle indisponible !", 0);
-		debugging('test debug file');
+		//debugging('test debug file');
 		return $list;
 	}
 	

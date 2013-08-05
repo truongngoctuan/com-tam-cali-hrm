@@ -65,7 +65,51 @@ include APP_BASE_PATH.'modulejslibs.inc.php';
 	</div>
 
 </div>
+<?php
+/*
+$TEST = $baseService->getDB()->Execute("SELECT * FROM BO_PHAN WHERE TRUE");
+debugging_p($TEST);
+$TEST2 = $baseService->getDB()->GetAll("SELECT * FROM BO_PHAN WHERE TRUE");
+debugging_p($TEST2);
+
+$arr234 = $baseService->getDB()->GetAssoc("select * from BO_PHAN"); # returns associative array $key=>col
+debugging_p($arr234);
+*/
+
+//build a staic header
+$boPhanArray = $baseService->getDB()->GetAll("SELECT * FROM BO_PHAN WHERE TRUE");
+$loaiNgayArray = $baseService->getDB()->GetAll("SELECT * FROM LOAI_NGAY WHERE TRUE");
+debugging_p($boPhanArray, "bophanArray");
+debugging_p($loaiNgayArray, "loaiNgayArray");
+
+$htmlHeader="";
+$firstRowHeader = "";
+$secondRowHeader = "";
+// add chi Nhanh - ca columns
+$firstRowHeader = '<th class="sorting_disabled" colspan="1" rowspan="2">Chi nhánh - Ca</th>';
+//$secondRowHeader = '<th class="sorting_disabled" colspan="0"></th>';
+foreach($loaiNgayArray as $loaiNgay) {
+	//debugging("asd");
+	$firstRowHeader = $firstRowHeader.'<th align="center" class="sorting_disabled" colspan="'.count($boPhanArray).'" rowspan="1">'.$loaiNgay['TEN'].'</th>';
+}
+$firstRowHeader = '<tr role="row">'.$firstRowHeader.'</tr>';
+
+
+foreach($loaiNgayArray as $loaiNgay) {
+	foreach ($boPhanArray as $boPhan) {
+		$secondRowHeader = $secondRowHeader.'<th class="sorting_disabled" colspan="1" rowspan="1">'.$boPhan['TEN'].'</th>';
+	}
+}
+$secondRowHeader = '<tr role="row">'.$secondRowHeader.'</tr>';
+
+debugging_p($firstRowHeader,"firstRowHeader");
+debugging_p($secondRowHeader, "secondRowHeader");
+
+$htmlHeader = '<thead>'.$firstRowHeader.$secondRowHeader.'</thead>';
+?>
 <script>
+var htmlHeader = <?php echo json_encode($htmlHeader); ?>;
+var nHeaderColumns = <?php echo (count($loaiNgayArray) + count($boPhanArray) + 1); ?>;
 var modJsList = new Array();
 
 modJsList['tabNhanVien'] = new NhanVienAdapter('NhanVien');

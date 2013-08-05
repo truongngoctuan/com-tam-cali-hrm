@@ -269,3 +269,59 @@ NhuCauTuyenDungAdapter.method('getFormFields', function() {
 			[ "GHI_CHU", {"label":"Ghi ch\u00fa","type":"text","allow-null":true,"validation":"none"}]
 	];
 });
+
+
+NhuCauTuyenDungAdapter.method('createTable', function(elementId) {
+	//alert('NVStateAdapter.createTable');
+	
+	if(this.getRemoteTable()){
+		this.createTableServer(elementId);
+		return;
+	}
+	
+	
+	var headers = new Array();// = this.getHeaders();
+	var data = this.getTableData();
+	//debugging("headers", headers);
+	for (var i=0;i<nHeaderColumns;i++)
+	{
+	headers.push({ "sTitle": "", "sClass": "center" });
+	}
+	//headers.push({ "sTitle": "", "sClass": "center" });
+	
+	for(var i=0;i<data.length;i++){
+		data[i].push(this.getActionButtonsHtml(data[i][0],data[i]));
+	}
+	var html = "";
+	if(this.getShowAddNew()){
+		html = '<button style="float:right;" onclick="modJs.renderForm();return false;" class="btn btn-small">Add New <span class="icon-plus-sign"></span></button><table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="grid"></table>';
+	}else{
+		html = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="grid"></table>';
+	}
+
+	$('#'+elementId).html(html);
+	
+	var dataTableParams = {
+			"sDom": "<'row'<'dataClass1'l><'dataClass2'f>r>t<'row'<'dataClass3'i><'dataClass4'p>>",
+			"sPaginationType": "bootstrap",
+			"oLanguage": {
+				"sLengthMenu": "_MENU_ records per page"
+			},
+			"aaData": data,
+			"aoColumns": headers,
+			"bSort": false
+		};
+	
+	var customTableParams = this.getCustomTableParams();
+	
+	$.extend(dataTableParams, customTableParams);
+	
+	var oTable = $('#'+elementId+' #grid').dataTable( dataTableParams );
+	
+	$('.tableActionButton').tooltip();
+	
+	//var oTable = $('#'+elementId+' #grid');
+	//debugging("oTable", oTable);
+     $('#' + elementId + ' #grid>thead').html(htmlHeader);
+	
+});
