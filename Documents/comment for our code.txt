@@ -63,19 +63,26 @@ data: [
     }
 ]
 
+need a static header, not dynamic one.
+
 DataTables fully supports colspan and rowspans in the header, assigning the required sorting listeners to the TH element suitable for that column.
-	try to make a php test page for testing any service. (write sending string, connect, get data and show the result)
-	simulate the complex header to test out
-	make the complex header from service
-	make the data from header
-	
-	- done the function load service and related functions.
-			
-			
-interface:
+
+some sample code for active record
+/*
+$bophan = new BoPhan();
+$bophanArray = $bophan->Find("", array());
+//debugging(print_r($bophanArray, true));
+foreach($bophanArray as $ele ) {
+//	debugging(print_r($ele, true));
+}
+*/
+TO DO:
+	make the complex static header from php file 
 	load data from server into dataTable
-	edit data --> update
-	table Editable, when data is edited --> update it by sending to server
+		transform data in service
+		load that kind of data in createTable
+		add notation for later use
+	edit data --> function update, use the notation from above
 	build a sum row for this table when load
 	after edit successfully, update sum rows
 	build interface choose month and year with default value.
@@ -85,6 +92,7 @@ interface:
 		copy row (create interface, function copy to row left/right)
 	function clear data for one month (create interface, function JavaScript)
 	
+
 $(document).ready( function () {
   $('#example').dataTable( {
     "aaData": [
