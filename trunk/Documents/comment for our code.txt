@@ -1,10 +1,119 @@
-﻿ve ra giao dien cua chuc nang
-liet ke cac chuc nang can co cho service
-lam service
-lay du lieu tu service load into dataTable
-table Editable, when data is edited --> update it by sending to server
-build a sum row for this table when load
-after edit successfully, update sum rows.
+﻿list function for services:
+	copy data from 1 month to another
+		input
+		output
+	load data of 1 month
+		input {month:"8", year:"2013"}
+		output [[2,3,4,5],[6,7,8,9]] //string or number, pas sur
+		process
+			load all record according to month and year value
+			for each record, try to add to right position in array
+			
+			create data for header row (chi nhanh, ca(s/c)), 2 hidden column which is specific data for MA_CN and MA_MA_CA; number of column specific which MA_BP and which MA_LOAINGAY.
+		
+	load data header for table
+		input {a:"table header",table:"nhu_cau_tuyen_dung"}
+		output [unknown yet]
+		process
+			try to build data follow the syntax of header of tableData!
+			
+	update data 1 one particular bp - loaiNgay - cn - ca(sang/chieu)
+		input
+		output
+	delete data of 1 month
+		input
+		output
+
+TO DO:
+	investigate what is the data syntax for table in tableData.
+it is a 2D-array. Done :)
+data: [
+    [
+        "1",
+        "NT"
+    ],
+    [
+        "2",
+        "HBT"
+    ]
+	]
+	investigate the syntax of making a complex headers
+
+	simple header
+	headers: [
+    {
+        "sTitle": "ID",
+        "bVisible": false
+    },
+    {
+        "sTitle": "Tên ngắn"
+    },
+    {
+        "sTitle": "Tên dài"
+    },
+    {
+        "sTitle": "Địa chỉ"
+    },
+    {
+        "sTitle": "Điện thoại"
+    },
+    {
+        "sTitle": "",
+        "sClass": "center"
+    }
+]
+
+DataTables fully supports colspan and rowspans in the header, assigning the required sorting listeners to the TH element suitable for that column.
+	try to make a php test page for testing any service. (write sending string, connect, get data and show the result)
+	simulate the complex header to test out
+	make the complex header from service
+	make the data from header
+	
+	- done the function load service and related functions.
+			
+			
+interface:
+	load data from server into dataTable
+	edit data --> update
+	table Editable, when data is edited --> update it by sending to server
+	build a sum row for this table when load
+	after edit successfully, update sum rows
+	build interface choose month and year with default value.
+	build functions copy:
+		copy month (create interface, function)
+		copy column (create interface, function copy to column above/below)
+		copy row (create interface, function copy to row left/right)
+	function clear data for one month (create interface, function JavaScript)
+	
+$(document).ready( function () {
+  $('#example').dataTable( {
+    "aaData": [
+      {
+        "engine":   "Trident",
+        "browser":  "Internet Explorer 4.0",
+        "platform": "Win 95+",
+        "version":  4,
+        "grade":    "X"
+      },
+      {
+        "engine":   "Trident",
+        "browser":  "Internet Explorer 5.0",
+        "platform": "Win 95+",
+        "version":  5,
+        "grade":    "C"
+      }
+    ],
+    "aoColumns": [
+      { "sTitle": "Engine",   "mData": "engine" },
+      { "sTitle": "Browser",  "mData": "browser" },
+      { "sTitle": "Platform", "mData": "platform" },
+      { "sTitle": "Version",  "mData": "version" },
+      { "sTitle": "Grade",    "mData": "grade" }
+    ]
+  } );
+} );
+	
+	
 
 
 modJs la gi? HRMBase

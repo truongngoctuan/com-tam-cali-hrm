@@ -1,27 +1,5 @@
 <?php
 
-/*
-This file is part of iCE Hrm.
-
-iCE Hrm is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-iCE Hrm is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with iCE Hrm. If not, see <http://www.gnu.org/licenses/>.
-
-------------------------------------------------------------------
-
-Original work Copyright (c) 2012 [Gamonoid Media Pvt. Ltd]  
-Developer: Thilina Hasantha (thilina.hasantha[at]gmail.com / facebook.com/thilinah)
- */
-include APP_BASE_PATH.'classes/util.php';
 class BaseService{
 	
 	var $nonDeletables = array();
@@ -71,9 +49,7 @@ class BaseService{
 		if(!empty($mappingStr) && count($map)>0){
 			$list = $this->populateMapping($list, $map);
 		}
-		//error_log('hdhgdhg', 3, "/error.log");
-		//error_log("Base Oracle indisponible !", 0);
-		debugging('test debug file');
+
 		return $list;
 	}
 	
@@ -205,7 +181,7 @@ class BaseService{
 		if(!empty($mappingStr)){
 			$map = json_decode($mappingStr);	
 		}
-		echo('asd3');
+		//echo('asd3');
 		//print_r($obj);
 		$PrimaryKeyName = $obj->PrimaryKeyName();
 		if($obj->$PrimaryKeyName == $id){
@@ -233,7 +209,6 @@ class BaseService{
 					}	
 				}
 			}
-			debugging("obj", $obj);
 			return 	$obj;
 		}
 		//echo('asd10');
@@ -409,53 +384,5 @@ class BaseService{
 	public function getDB(){
 		return $this->db;
 	}
-	
-	//--------------------------------------------
-	//functions for table NHU_CAU_TUYEN_DUNG
-	
-	public function getasd($table,$mappingStr = null, $filterStr = null, $orderBy = null, $limit = null){
-		if(!empty($mappingStr)){
-		$map = json_decode($mappingStr);
-		}
-		$obj = new $table();
-		
-		$query = "";
-		$queryData = array();
-		if(!empty($filterStr)){
-			$filter = json_decode($filterStr);
-			
-			foreach($filter as $k=>$v){
-				$query.=" and ".$k."=?";
-				$queryData[] = $v;
-			}		
-		}
-		
-		if(empty($orderBy)){
-			$orderBy = "";
-		}else{
-			$orderBy = " ORDER BY ".$orderBy;
-		}
-		
-		
-		if(in_array($table, $this->userTables)){
-			$cemp = $this->getCurrentEmployeeId();
-			if(!empty($cemp)){
-				$list = $obj->Find("employee = ?".$query.$orderBy, array_merge(array($cemp),$queryData));	
-			}else{
-				$list = array();
-			}
-					
-		}else{
-			$list = $obj->Find("1=1".$query.$orderBy,$queryData);	
-		}	
-		
-		
-		
-		if(!empty($mappingStr) && count($map)>0){
-			$list = $this->populateMapping($list, $map);
-		}
-		
-		return $list;
-	}
-	
 }
+?>
