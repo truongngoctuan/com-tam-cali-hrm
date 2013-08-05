@@ -1,38 +1,38 @@
-﻿<li class="active"><a id="tabNhanVien" href="#tabPageNhanVien">Quản lý nhân viên</a></li>
+﻿<li class="active"><a id="tabNhuCauTuyenDung" href="#tabPageNhuCauTuyenDung">thêm nhu cầu tuyển dụng</a></li>
 --------------------------------------------------------------------------------------------
-		<div class="tab-pane active" id="tabPageNhanVien">
-			<div id="NhanVien" class="reviewBlock" data-content="List" style="padding-left:5px;">
+		<div class="tab-pane active" id="tabPageNhuCauTuyenDung">
+			<div id="NhuCauTuyenDung" class="reviewBlock" data-content="List" style="padding-left:5px;">
 		
 			</div>
-			<div id="NhanVienForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
-		
-			</div>
-		</div>
---------------------------------------------------------------------------------------------
-<li><a id="tabNhanVien" href="#tabPageNhanVien">Quản lý nhân viên</a></li>
---------------------------------------------------------------------------------------------
-		<div class="tab-pane" id="tabPageNhanVien">
-			<div id="NhanVien" class="reviewBlock" data-content="List" style="padding-left:5px;">
-		
-			</div>
-			<div id="NhanVienForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
+			<div id="NhuCauTuyenDungForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
 		
 			</div>
 		</div>
 --------------------------------------------------------------------------------------------
-modJsList['tabNhanVien'] = new NhanVienAdapter('NhanVien');
+<li><a id="tabNhuCauTuyenDung" href="#tabPageNhuCauTuyenDung">Thêm nhu cầu tuyển dụng</a></li>
+--------------------------------------------------------------------------------------------
+		<div class="tab-pane" id="tabPageNhuCauTuyenDung">
+			<div id="NhuCauTuyenDung" class="reviewBlock" data-content="List" style="padding-left:5px;">
+		
+			</div>
+			<div id="NhuCauTuyenDungForm" class="reviewBlock" data-content="Form" style="padding-left:5px;display:none;">
+		
+			</div>
+		</div>
+--------------------------------------------------------------------------------------------
+modJsList['tabNhuCauTuyenDung'] = new NhuCauTuyenDungAdapter('NhuCauTuyenDung');
 --------------------------------------------------------------------------------------------
 /**
- * NhanVienAdapter
+ * NhuCauTuyenDungAdapter
  */
 
-function NhanVienAdapter(endPoint) {
+function NhuCauTuyenDungAdapter(endPoint) {
 	this.initAdapter(endPoint);
 }
 
-NhanVienAdapter.inherits(AdapterBase);
+NhuCauTuyenDungAdapter.inherits(AdapterBase);
 
-NhanVienAdapter.method('getDataMapping', function() {
+NhuCauTuyenDungAdapter.method('getDataMapping', function() {
 	return [
 	        "MA",
 			"MA_BP",
@@ -57,7 +57,7 @@ NhanVienAdapter.method('getDataMapping', function() {
 	];
 });
 
-NhanVienAdapter.method('getHeaders', function() {
+NhuCauTuyenDungAdapter.method('getHeaders', function() {
 	return [
 			{ "sTitle": "M\u00e3", "bVisible":false},
 			{ "sTitle": "MA_BP" },
@@ -82,7 +82,7 @@ NhanVienAdapter.method('getHeaders', function() {
 	];
 });
 
-NhanVienAdapter.method('getFormFields', function() {
+NhuCauTuyenDungAdapter.method('getFormFields', function() {
 	return [
 	        [ "MA", {"label":"ID","type":"hidden"}],
 			[ "MA_BP", {"label":"MA_BP","type":"select","remote-source":["BoPhan","MA","TEN"]}],
@@ -107,8 +107,8 @@ NhanVienAdapter.method('getFormFields', function() {
 	];
 });
 --------------------------------------------------------------------------------------------
-class NhanVien extends BaseDateVN {
-	var $_table = 'NHAN_VIEN';
+class NhuCauTuyenDung extends BaseDateVN {
+	var $_table = 'NHU_CAU_TUYEN_DUNG';
 }
 --------------------------------------------------------------------------------------------
-NhanVien::SetDatabaseAdapter($dbLocal);
+NhuCauTuyenDung::SetDatabaseAdapter($dbLocal);

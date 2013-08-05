@@ -223,3 +223,7 @@ class NVState extends BaseDateVN {
 class NhanVien extends BaseDateVN {
 	var $_table = 'NHAN_VIEN';
 }
+
+class NhuCauTuyenDung extends BaseDateVN {
+	var $_table = 'NHU_CAU_TUYEN_DUNG';
+}

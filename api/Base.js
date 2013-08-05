@@ -181,7 +181,7 @@ IceHRMBase.method('createTable', function(elementId) {
 	for(var i=0;i<data.length;i++){
 		data[i].push(this.getActionButtonsHtml(data[i][0],data[i]));
 	}
-	debugging('headers', headers);
+	//debugging('headers', headers);
 	debugging('data', data);
 	var html = "";
 	if(this.getShowAddNew()){

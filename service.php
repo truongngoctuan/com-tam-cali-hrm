@@ -21,7 +21,7 @@ Original work Copyright (c) 2012 [Gamonoid Media Pvt. Ltd]
 Developer: Thilina Hasantha (thilina.hasantha[at]gmail.com / facebook.com/thilinah)
  */
 include ("include.common.php");
-
+//include ("classes/services/testServices.php");
 
 $modulePath = getSessionObject("modulePath");
 if(!defined('MODULE_PATH')){
@@ -35,6 +35,13 @@ if($action == 'get'){
 	$ret['object'] = $baseService->get($_REQUEST['t'],$_REQUEST['sm'],$_REQUEST['ft'],$_REQUEST['ob']);
 	$ret['status'] = "SUCCESS";
 	
+}else if($action == 'getData'){
+	$ret['object'] = $baseService->getElement($_REQUEST['t'],$_REQUEST['id'],$_REQUEST['sm']);
+	if(!empty($ret['object'])){
+		$ret['status'] = "SUCCESS";	
+	}else{
+		$ret['status'] = "ERROR";
+	}
 }else if($action == 'getElement'){
 	$ret['object'] = $baseService->getElement($_REQUEST['t'],$_REQUEST['id'],$_REQUEST['sm']);
 	if(!empty($ret['object'])){
