@@ -413,49 +413,99 @@ class BaseService{
 	//--------------------------------------------
 	//functions for table NHU_CAU_TUYEN_DUNG
 	
-	public function getasd($table,$mappingStr = null, $filterStr = null, $orderBy = null, $limit = null){
-		if(!empty($mappingStr)){
-		$map = json_decode($mappingStr);
-		}
-		$obj = new $table();
+	public function getNhuCauTuyenDung($year, $month){
+		debugging("getNhuCauTuyenDung");
+		//init arr cells
+		$boPhan_LoaiNgayArray = $this->getDB()->GetAll("
+		SELECT LOAI_NGAY.MA as MA_LOAI_NGAY, BO_PHAN.MA as MA_BP
+		FROM LOAI_NGAY, BO_PHAN
+		WHERE TRUE
+		ORDER BY LOAI_NGAY.MA ASC, BO_PHAN.MA ASC"
+		);
 		
-		$query = "";
-		$queryData = array();
-		if(!empty($filterStr)){
-			$filter = json_decode($filterStr);
+		$chiNhanh_CaArray = $this->getDB()->GetAll("
+		SELECT CA.MA as MA_CA, CHI_NHANH.MA as MA_CN, 
+			CA.TEN as TEN_CA, CHI_NHANH.TEN_NGAN as TEN_CN
+		FROM CHI_NHANH, CA 
+		WHERE TRUE"
+		);
+		//debugging_p($boPhan_LoaiNgayArray, "boPhan_LoaiNgayArray");
+		//debugging_p($chiNhanh_CaArray, "chiNhanh_CaArray");
+		$arr = [];
+		foreach($chiNhanh_CaArray as $cnc) {
+			$row_index_name = $cnc['TEN_CN'].' - '.$cnc['TEN_CA'];
 			
-			foreach($filter as $k=>$v){
-				$query.=" and ".$k."=?";
-				$queryData[] = $v;
-			}		
-		}
-		
-		if(empty($orderBy)){
-			$orderBy = "";
-		}else{
-			$orderBy = " ORDER BY ".$orderBy;
-		}
-		
-		
-		if(in_array($table, $this->userTables)){
-			$cemp = $this->getCurrentEmployeeId();
-			if(!empty($cemp)){
-				$list = $obj->Find("employee = ?".$query.$orderBy, array_merge(array($cemp),$queryData));	
-			}else{
-				$list = array();
+			foreach($boPhan_LoaiNgayArray as $bpln) {
+				$arr[$row_index_name][$bpln['MA_LOAI_NGAY'].' - '.$bpln['MA_BP']] = array(	'MA_CN'=>$cnc['MA_CN'],
+					'MA_CA'=>$cnc['MA_CA'],
+					'MA_BP'=>$bpln['MA_BP'],
+					'LOAI_NGAY'=>$bpln['MA_LOAI_NGAY'],
+					'SO_LUONG'=>0,
+					'NAME_FIRST_COLUMN'=>$cnc['TEN_CN'].' - '.$cnc['TEN_CA']
+					);
+					/*
+				debugging_p(array(	'MA_CN'=>$cnc['MA_CN'],
+					'MA_CA'=>$cnc['MA_CA'],
+					'MA_BP'=>$bpln['MA_BP'],
+					'LOAI_NGAY'=>$bpln['MA_LOAI_NGAY'],
+					'SO_LUONG'=>0,
+					'NAME_FIRST_COLUMN'=>$cnc['TEN_CN'].' - '.$cnc['TEN_CA']
+					));
+					*/
 			}
-					
-		}else{
-			$list = $obj->Find("1=1".$query.$orderBy,$queryData);	
-		}	
-		
-		
-		
-		if(!empty($mappingStr) && count($map)>0){
-			$list = $this->populateMapping($list, $map);
 		}
+		debugging_p($arr,"arr init");
+		//--------------------------------------------------------------------		
+		$nhuCauTuyenDungArray = $this->getDB()->GetAll("
+		SELECT CONCAT(CHI_NHANH.TEN_NGAN, ' - ', CA.TEN) AS NAME_FIRST_COLUMN, 
+			MA_CA, MA_CN, MA_BP, LOAI_NGAY, SO_LUONG
+		FROM `nhu_cau_tuyen_dung`, CHI_NHANH, CA
+		WHERE YEAR(TU_NGAY) = 2013 AND MONTH(TU_NGAY)= 8 
+			AND MA_CN = CHI_NHANH.MA AND MA_CA = CA.MA 
+		");
+		debugging_p($nhuCauTuyenDungArray, "nhuCauTuyenDungArray");
 		
-		return $list;
+		foreach($nhuCauTuyenDungArray as $nhuCauTuyenDung) {
+			$arr[$nhuCauTuyenDung['NAME_FIRST_COLUMN']][$nhuCauTuyenDung['LOAI_NGAY'].' - '.$nhuCauTuyenDung['MA_BP']]['SO_LUONG'] = $nhuCauTuyenDung['SO_LUONG'];
+		}
+		debugging_p($arr,"arr return from getNhuCauTuyenDung");
+		return $arr;
 	}
+	
+	public function getNhuCauTuyenDung2($year, $month){
+		$chiNhanhArray = $this->getDB()->GetAll("SELECT * FROM CHI_NHANH WHERE TRUE");
+		$caArray = $this->getDB()->GetAll("SELECT * FROM CA WHERE TRUE");
+
+		$nhuCauTuyenDungArray = $this->getDB()->GetAll("SELECT * FROM `nhu_cau_tuyen_dung` WHERE YEAR(TU_NGAY) = 2013 AND MONTH(TU_NGAY)= 8");
+		//debugging_p($nhuCauTuyenDungArray);
+		$arr = [];
+		foreach($nhuCauTuyenDungArray as $nhuCauTuyenDung) {
+			//find name of chiNhanh
+			foreach($chiNhanhArray as $chiNhanh){
+				if ($chiNhanh['MA'] == $nhuCauTuyenDung['MA_CN']) {
+					$nameChiNhanh = $chiNhanh['TEN_NGAN'];
+					break;
+				}
+			}
+			
+			//find name of Ca
+			foreach($caArray as $ca){
+				if ($ca['MA'] == $nhuCauTuyenDung['MA_CA']) {
+					$nameCa = $ca['TEN'];
+					break;
+				}
+			}
+			array_push($arr, array(	'MA_CN'=>$nhuCauTuyenDung['MA_CN'],
+									'MA_CA'=>$nhuCauTuyenDung['MA_CA'],
+									'MA_BP'=>$nhuCauTuyenDung['MA_BP'],
+									'LOAI_NGAY'=>$nhuCauTuyenDung['LOAI_NGAY'],
+									'SO_LUONG'=>$nhuCauTuyenDung['SO_LUONG'],
+									'nameFirstColumn'=>$nameChiNhanh.' '.$nameCa
+								));
+		}
+		debugging_p($arr,"arr return from getNhuCauTuyenDung");
+		return $arr;
+	}
+	
 	
 }

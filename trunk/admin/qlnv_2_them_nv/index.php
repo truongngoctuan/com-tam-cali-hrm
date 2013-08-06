@@ -102,8 +102,8 @@ foreach($loaiNgayArray as $loaiNgay) {
 }
 $secondRowHeader = '<tr role="row">'.$secondRowHeader.'</tr>';
 
-debugging_p($firstRowHeader,"firstRowHeader");
-debugging_p($secondRowHeader, "secondRowHeader");
+//debugging_p($firstRowHeader,"firstRowHeader");
+//debugging_p($secondRowHeader, "secondRowHeader");
 
 $htmlHeader = '<thead>'.$firstRowHeader.$secondRowHeader.'</thead>';
 ?>

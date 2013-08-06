@@ -32,9 +32,14 @@ include("server.includes.inc.php");
 
 $action = $_REQUEST['a'];
 if($action == 'get'){
-	$ret['object'] = $baseService->get($_REQUEST['t'],$_REQUEST['sm'],$_REQUEST['ft'],$_REQUEST['ob']);
-	$ret['status'] = "SUCCESS";
-	
+	if ($_REQUEST['t'] == "NhuCauTuyenDung") {
+		$ret['object'] = $baseService->getNhuCauTuyenDung($_REQUEST['year'], $_REQUEST['month']);
+		$ret['status'] = "SUCCESS";
+	}
+	else {
+		$ret['object'] = $baseService->get($_REQUEST['t'],$_REQUEST['sm'],$_REQUEST['ft'],$_REQUEST['ob']);
+		$ret['status'] = "SUCCESS";
+	}
 }else if($action == 'getData'){
 	$ret['object'] = $baseService->getElement($_REQUEST['t'],$_REQUEST['id'],$_REQUEST['sm']);
 	if(!empty($ret['object'])){
