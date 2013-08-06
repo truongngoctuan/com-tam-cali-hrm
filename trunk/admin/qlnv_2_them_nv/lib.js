@@ -304,6 +304,41 @@ NhuCauTuyenDungAdapter.method('get', function(callBackData) {
 	//console.log(url);
 });
 
+AdapterBase.method('getSuccessCallBack', function(callBackData,serverData) {
+	/*
+	var data = [];
+	var mapping = this.getDataMapping();
+	for(var i=0;i<serverData.length;i++){
+		var row = [];
+		for(var j=0;j<mapping.length;j++){
+			row[j] = serverData[i][mapping[j]];
+		}
+		data.push(this.preProcessTableData(row));
+	}
+	*/
+	this.sourceData = serverData;
+	var data = serverData;
+	if(callBackData['callBack']!= undefined && callBackData['callBack'] != null){
+		if(callBackData['callBackData'] == undefined || callBackData['callBackData'] == null){
+			callBackData['callBackData'] = new Array();
+		}
+		callBackData['callBackData'].push(serverData);
+		callBackData['callBackData'].push(data);
+		this.callFunction(callBackData['callBack'],callBackData['callBackData']);
+	}
+	
+	this.tableData = data;
+	
+	if(callBackData['noRender']!= undefined && callBackData['noRender'] != null && callBackData['noRender'] == true){
+		
+	}else{
+		this.createTable(this.getTableName());
+		$("#"+this.getTableName()+'Form').hide();
+		$("#"+this.getTableName()).show();
+	}
+	
+});
+
 NhuCauTuyenDungAdapter.method('createTable', function(elementId) {
 	//alert('NVStateAdapter.createTable');
 	
@@ -314,17 +349,34 @@ NhuCauTuyenDungAdapter.method('createTable', function(elementId) {
 	
 	
 	var headers = new Array();// = this.getHeaders();
-	var data = this.getTableData();
-	debugging("data", data);
+	var data_temp = this.getTableData();
+	var data = [];
+	//process data here
+	for (var element in data_temp){
+	  rowRaw = data_temp[element];
+	  debugging("rowRaw", rowRaw);
+	  // Do something with element i.
+	  rowArray = [];
+	  var element2;
+	  for (element2 in rowRaw){
+	  	cellRaw = rowRaw[element2];
+	  	cell_html = '<div>' + cellRaw['SO_LUONG'] + '</div>';
+	  	rowArray.push(cell_html);
+	  }
+	  rowArray.unshift(rowRaw[element2]['NAME_FIRST_COLUMN']);
+	  data.push(rowArray);
+	}
+	debugging("data processed", data);
 	for (var i=0;i<nHeaderColumns;i++)
 	{
-	headers.push({ "sTitle": "", "sClass": "center" });
+	headers.push({ "sTitle": "asd", "sClass": "center" });
 	}
 	//headers.push({ "sTitle": "", "sClass": "center" });
-	
+	/*
 	for(var i=0;i<data.length;i++){
 		data[i].push(this.getActionButtonsHtml(data[i][0],data[i]));
 	}
+	*/
 	var html = "";
 	if(this.getShowAddNew()){
 		html = '<button style="float:right;" onclick="modJs.renderForm();return false;" class="btn btn-small">Add New <span class="icon-plus-sign"></span></button><table cellpadding="0" cellspacing="0" border="0" class="table table-striped" id="grid"></table>';
