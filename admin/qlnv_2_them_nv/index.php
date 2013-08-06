@@ -105,11 +105,12 @@ $secondRowHeader = '<tr role="row">'.$secondRowHeader.'</tr>';
 //debugging_p($firstRowHeader,"firstRowHeader");
 //debugging_p($secondRowHeader, "secondRowHeader");
 
-$htmlHeader = '<thead>'.$firstRowHeader.$secondRowHeader.'</thead>';
+$htmlHeader = $firstRowHeader.$secondRowHeader;
 ?>
 <script>
 var htmlHeader = <?php echo json_encode($htmlHeader); ?>;
-var nHeaderColumns = <?php echo (count($loaiNgayArray) + count($boPhanArray) + 1); ?>;
+var nHeaderColumns = <?php echo (count($loaiNgayArray) * count($boPhanArray) + 1); ?>;
+console.log(nHeaderColumns);
 var modJsList = new Array();
 
 modJsList['tabNhanVien'] = new NhanVienAdapter('NhanVien');
