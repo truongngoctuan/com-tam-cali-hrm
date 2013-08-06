@@ -271,6 +271,39 @@ NhuCauTuyenDungAdapter.method('getFormFields', function() {
 });
 
 
+NhuCauTuyenDungAdapter.method('get', function(callBackData) {
+	//console.log("asd");
+	var that = this;
+	var sourceMappingJson = JSON.stringify(this.getSourceMapping());
+	
+	var filterJson = "";
+	if(this.getFilter() != null){
+		filterJson = JSON.stringify(this.getFilter());
+	}
+	
+	var orderBy = "";
+	if(this.getOrderBy() != null){
+		orderBy = this.getOrderBy();
+	}
+	
+	var yearDemand = "";
+	yearDemand = 2013;
+	
+	var monthDemand = "";
+	monthDemand = 8;
+	
+	$.post(this.moduleRelativeURL, {'t':this.table,'a':'get','sm':sourceMappingJson,'ft':filterJson,'ob':orderBy, 'year':yearDemand, 'month':monthDemand}, function(data) {
+		if(data.status == "SUCCESS"){
+			that.getSuccessCallBack(callBackData,data.object);
+		}else{
+			that.getFailCallBack(callBackData,data.object);
+		}
+	},"json");
+	
+	//var url = this.getDataUrl();
+	//console.log(url);
+});
+
 NhuCauTuyenDungAdapter.method('createTable', function(elementId) {
 	//alert('NVStateAdapter.createTable');
 	
@@ -282,7 +315,7 @@ NhuCauTuyenDungAdapter.method('createTable', function(elementId) {
 	
 	var headers = new Array();// = this.getHeaders();
 	var data = this.getTableData();
-	//debugging("headers", headers);
+	debugging("data", data);
 	for (var i=0;i<nHeaderColumns;i++)
 	{
 	headers.push({ "sTitle": "", "sClass": "center" });

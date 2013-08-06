@@ -15,7 +15,10 @@ function debugging($msg, $str="") {
 
 }
 
-function debugging_p($obj) {
+function debugging_p($obj, $str="") {
+	if ($str != ""){
+		error_log($str."\n", 3, APP_BASE_PATH."error.log");	
+	}
 	$msg = print_r($obj, true);
 	error_log($msg."\n", 3, APP_BASE_PATH."error.log");		
 }
