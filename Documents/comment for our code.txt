@@ -3,7 +3,7 @@
 		input
 		output
 	load data of 1 month
-		input {month:"8", year:"2013"}
+		input {month:"8", year:"2013", t:"NhuCauTuyenDung"}
 		output [[2,3,4,5],[6,7,8,9]] //string or number, pas sur
 		process
 			load all record according to month and year value

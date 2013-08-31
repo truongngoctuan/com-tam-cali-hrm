@@ -304,7 +304,7 @@ NhuCauTuyenDungAdapter.method('get', function(callBackData) {
 	//console.log(url);
 });
 
-AdapterBase.method('getSuccessCallBack', function(callBackData,serverData) {
+NhuCauTuyenDungAdapter.method('getSuccessCallBack', function(callBackData,serverData) {
 	/*
 	var data = [];
 	var mapping = this.getDataMapping();
@@ -341,32 +341,38 @@ AdapterBase.method('getSuccessCallBack', function(callBackData,serverData) {
 
 NhuCauTuyenDungAdapter.method('createTable', function(elementId) {
 	//alert('NVStateAdapter.createTable');
-	
 	if(this.getRemoteTable()){
 		this.createTableServer(elementId);
 		return;
 	}
-	
-	
+		
 	var headers = new Array();// = this.getHeaders();
 	var data_temp = this.getTableData();
 	var data = [];
 	//process data here
 	for (var element in data_temp){
 	  rowRaw = data_temp[element];
-	  debugging("rowRaw", rowRaw);
+	  //debugging("rowRaw", rowRaw);
 	  // Do something with element i.
 	  rowArray = [];
 	  var element2;
 	  for (element2 in rowRaw){
 	  	cellRaw = rowRaw[element2];
-	  	cell_html = '<div>' + cellRaw['SO_LUONG'] + '</div>';
+	  	cell_html = '<div class="edit" ' 
+			+ ' MA_CN="' + cellRaw['MA_CN'] + '" '
+			+ ' MA_CA="' + cellRaw['MA_CA'] + '" '
+			+ ' MA_BP="' + cellRaw['MA_BP'] + '" '
+			+ ' LOAI_NGAY="' + cellRaw['LOAI_NGAY'] + '" '
+			+ ' MA_CN="' + cellRaw['MA_CN'] + '" '
+			+ ' YEAR="' + cellRaw['YEAR'] + '" '
+			+ ' MONTH="' + cellRaw['MONTH'] + '" '
+			+ ' >' + cellRaw['SO_LUONG'] + '</div>';
 	  	rowArray.push(cell_html);
 	  }
 	  rowArray.unshift(rowRaw[element2]['NAME_FIRST_COLUMN']);
 	  data.push(rowArray);
 	}
-	debugging("data processed", data);
+	//debugging("data processed", data);
 	for (var i=0;i<nHeaderColumns;i++)
 	{
 	headers.push({ "sTitle": "asd", "sClass": "center" });
@@ -409,4 +415,30 @@ NhuCauTuyenDungAdapter.method('createTable', function(elementId) {
 	//debugging("oTable", oTable);
      $('#' + elementId + ' #grid>thead').html(htmlHeader);
 	
+	
+    /* Apply the jEditable handlers to the table */
+    oTable.$('.edit').editable( '../app/service.php', {
+        "callback": function( sValue, y ) {
+            var aPos = oTable.fnGetPosition( this );
+            oTable.fnUpdate( sValue, aPos[0], aPos[1] );
+        },
+        "submitdata": function ( value, settings ) {
+            return {
+                //"row_id": this.parentNode.getAttribute('id'),
+				//"row_id": $('#'+elementId+' #grid'+ ' #id'),
+                "column": oTable.fnGetPosition( this )[2],
+				"MA_CA": this.getAttribute('MA_CA'),
+				"MA_CN": this.getAttribute('MA_CN'),
+				"MA_BP": this.getAttribute('MA_BP'),
+				"LOAI_NGAY": this.getAttribute('LOAI_NGAY'),
+				"YEAR": this.getAttribute('YEAR'),
+				"MONTH": this.getAttribute('MONTH'),
+				"SO_LUONG": $(this).val(),
+				"t": "NHU_CAU_TUYEN_DUNG",
+				"a": "add"
+            };
+        },
+        "height": "14px",
+        "width": "100%"
+    } );
 });

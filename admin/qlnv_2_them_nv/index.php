@@ -90,7 +90,7 @@ $firstRowHeader = '<th class="sorting_disabled" colspan="1" rowspan="2">Chi nhá
 //$secondRowHeader = '<th class="sorting_disabled" colspan="0"></th>';
 foreach($loaiNgayArray as $loaiNgay) {
 	//debugging("asd");
-	$firstRowHeader = $firstRowHeader.'<th align="center" class="sorting_disabled" colspan="'.count($boPhanArray).'" rowspan="1">'.$loaiNgay['TEN'].'</th>';
+	$firstRowHeader = $firstRowHeader.'<th align="center" class="sorting_disabled" colspan="'.count($boPhanArray).'" rowspan="1"><div align="center">'.$loaiNgay['TEN'].'</div></th>';
 }
 $firstRowHeader = '<tr role="row">'.$firstRowHeader.'</tr>';
 
