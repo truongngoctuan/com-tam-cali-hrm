@@ -441,7 +441,9 @@ class BaseService{
 					'MA_BP'=>$bpln['MA_BP'],
 					'LOAI_NGAY'=>$bpln['MA_LOAI_NGAY'],
 					'SO_LUONG'=>0,
-					'NAME_FIRST_COLUMN'=>$cnc['TEN_CN'].' - '.$cnc['TEN_CA']
+					'NAME_FIRST_COLUMN'=>$cnc['TEN_CN'].' - '.$cnc['TEN_CA'],
+					'YEAR'=>$year,
+					'MONTH'=>$month
 					);
 					/*
 				debugging_p(array(	'MA_CN'=>$cnc['MA_CN'],
@@ -454,7 +456,7 @@ class BaseService{
 					*/
 			}
 		}
-		debugging_p($arr,"arr init");
+		//debugging_p($arr,"arr init");
 		//--------------------------------------------------------------------		
 		$nhuCauTuyenDungArray = $this->getDB()->GetAll("
 		SELECT CONCAT(CHI_NHANH.TEN_NGAN, ' - ', CA.TEN) AS NAME_FIRST_COLUMN, 
@@ -468,44 +470,8 @@ class BaseService{
 		foreach($nhuCauTuyenDungArray as $nhuCauTuyenDung) {
 			$arr[$nhuCauTuyenDung['NAME_FIRST_COLUMN']][$nhuCauTuyenDung['LOAI_NGAY'].' - '.$nhuCauTuyenDung['MA_BP']]['SO_LUONG'] = $nhuCauTuyenDung['SO_LUONG'];
 		}
-		debugging_p($arr,"arr return from getNhuCauTuyenDung");
+		//debugging_p($arr,"arr return from getNhuCauTuyenDung");
 		return $arr;
 	}
-	
-	public function getNhuCauTuyenDung2($year, $month){
-		$chiNhanhArray = $this->getDB()->GetAll("SELECT * FROM CHI_NHANH WHERE TRUE");
-		$caArray = $this->getDB()->GetAll("SELECT * FROM CA WHERE TRUE");
-
-		$nhuCauTuyenDungArray = $this->getDB()->GetAll("SELECT * FROM `nhu_cau_tuyen_dung` WHERE YEAR(TU_NGAY) = 2013 AND MONTH(TU_NGAY)= 8");
-		//debugging_p($nhuCauTuyenDungArray);
-		$arr = [];
-		foreach($nhuCauTuyenDungArray as $nhuCauTuyenDung) {
-			//find name of chiNhanh
-			foreach($chiNhanhArray as $chiNhanh){
-				if ($chiNhanh['MA'] == $nhuCauTuyenDung['MA_CN']) {
-					$nameChiNhanh = $chiNhanh['TEN_NGAN'];
-					break;
-				}
-			}
-			
-			//find name of Ca
-			foreach($caArray as $ca){
-				if ($ca['MA'] == $nhuCauTuyenDung['MA_CA']) {
-					$nameCa = $ca['TEN'];
-					break;
-				}
-			}
-			array_push($arr, array(	'MA_CN'=>$nhuCauTuyenDung['MA_CN'],
-									'MA_CA'=>$nhuCauTuyenDung['MA_CA'],
-									'MA_BP'=>$nhuCauTuyenDung['MA_BP'],
-									'LOAI_NGAY'=>$nhuCauTuyenDung['LOAI_NGAY'],
-									'SO_LUONG'=>$nhuCauTuyenDung['SO_LUONG'],
-									'nameFirstColumn'=>$nameChiNhanh.' '.$nameCa
-								));
-		}
-		debugging_p($arr,"arr return from getNhuCauTuyenDung");
-		return $arr;
-	}
-	
-	
+		
 }
