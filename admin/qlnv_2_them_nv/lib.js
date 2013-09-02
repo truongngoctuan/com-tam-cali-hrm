@@ -176,7 +176,7 @@ NVStateAdapter.method('createTable', function(elementId) {
             return {
                 //"row_id": this.parentNode.getAttribute('id'),
 				"row_id": $('#'+elementId+' #grid'+ ' #id'),
-                "column": oTable.fnGetPosition( this )[2]
+                "column": oTable.fnGetPosition( this )
             };
         },
         "height": "14px",
@@ -272,7 +272,6 @@ NhuCauTuyenDungAdapter.method('getFormFields', function() {
 
 
 NhuCauTuyenDungAdapter.method('get', function(callBackData) {
-	//console.log("asd");
 	var that = this;
 	var sourceMappingJson = JSON.stringify(this.getSourceMapping());
 	
@@ -291,8 +290,10 @@ NhuCauTuyenDungAdapter.method('get', function(callBackData) {
 	
 	var monthDemand = "";
 	monthDemand = 8;
-	
-	$.post(this.moduleRelativeURL, {'t':this.table,'a':'get','sm':sourceMappingJson,'ft':filterJson,'ob':orderBy, 'year':yearDemand, 'month':monthDemand}, function(data) {
+
+//	$.post(this.moduleRelativeURL, {'t':this.table,'a':'get','sm':sourceMappingJson,'ft':filterJson,'ob':orderBy, 'year':yearDemand, 'month':monthDemand}, function(data) {
+			
+	$.post(this.moduleRelativeURL, {'t':this.table,'a':'get', 'year':yearDemand, 'month':monthDemand}, function(data) {
 		if(data.status == "SUCCESS"){
 			that.getSuccessCallBack(callBackData,data.object);
 		}else{
@@ -418,24 +419,36 @@ NhuCauTuyenDungAdapter.method('createTable', function(elementId) {
 	
     /* Apply the jEditable handlers to the table */
     oTable.$('.edit').editable( '../app/service.php', {
+		"name": "SO_LUONG",
         "callback": function( sValue, y ) {
             var aPos = oTable.fnGetPosition( this );
-            oTable.fnUpdate( sValue, aPos[0], aPos[1] );
+			debugging("this",this);
+			debugging("fnGetPosition", aPos);
+			debugging("sValue", sValue);
+			debugging("y", y);
+			
+			//oTable.fnUpdate( sValue, aPos[0], aPos[1] );
+            oTable.fnUpdate( sValue, 1, 1 );
         },
         "submitdata": function ( value, settings ) {
+			debugging("this", this);
+			debugging("value from submitdata: ", value);
+			debugging("settings from submitdata: ", settings);
+			debugging("oTable.fnGetPosition", oTable.fnGetPosition( this ));
             return {
                 //"row_id": this.parentNode.getAttribute('id'),
 				//"row_id": $('#'+elementId+' #grid'+ ' #id'),
-                "column": oTable.fnGetPosition( this )[2],
+                //"column": oTable.fnGetPosition( this ),
 				"MA_CA": this.getAttribute('MA_CA'),
 				"MA_CN": this.getAttribute('MA_CN'),
 				"MA_BP": this.getAttribute('MA_BP'),
 				"LOAI_NGAY": this.getAttribute('LOAI_NGAY'),
-				"YEAR": this.getAttribute('YEAR'),
-				"MONTH": this.getAttribute('MONTH'),
-				"SO_LUONG": $(this).val(),
-				"t": "NHU_CAU_TUYEN_DUNG",
-				"a": "add"
+				"TU_NGAY": this.getAttribute('YEAR') + "-" + this.getAttribute('MONTH') + "-01 00:00:00",//2013-08-05 18:49:42
+				//"YEAR": this.getAttribute('YEAR'),
+				//"MONTH": this.getAttribute('MONTH'),
+				//"SO_LUONG": $(this).val(),
+				"a": "editable",
+				"t": "NhuCauTuyenDung"
             };
         },
         "height": "14px",

@@ -240,14 +240,94 @@ class BaseService{
 		return null;
 	}
 	
+	public function addElementMultiPrimaryKey($table,$obj){
+		$ele = new $table();
+		//debugging_p($ele, "ele")	;
+		$PrimaryKeyName = $ele->PrimaryKeyName();
+		
+		debugging_p($PrimaryKeyName, "PrimaryKeyName");
+				
+		$arrArgLoad = array();
+		$strPrimaryKeyName = "";
+		
+		foreach ($PrimaryKeyName as $pkey) {
+			array_push($arrArgLoad, $obj[$pkey]);
+			
+			$strPrimaryKeyName = $strPrimaryKeyName.$pkey.' = ? ';
+			if ($i < count($PrimaryKeyName) - 1) {
+				$strPrimaryKeyName = $strPrimaryKeyName.' AND ';
+				}
+			$i++;
+		}
+		$ele->Load($strPrimaryKeyName, $arrArgLoad);
+		
+		
+		
+		
+		//check in database the existance of this record or not.
+		/*
+		$strPrimaryKeyName = '';
+		$i = 0;
+		foreach ($PrimaryKeyName as $pkey) {
+			$strPrimaryKeyName = $strPrimaryKeyName.$pkey.' = '.$obj[$pkey];
+			if ($i < count($PrimaryKeyName) - 1) {
+				$strPrimaryKeyName = $strPrimaryKeyName.' AND ';
+				}
+			$i++;
+		}
+		
+		//$strPrimaryKeyName = $strPrimaryKeyName.'TRUE ';
+		
+		$ele->Load($strPrimaryKeyName);
+		*/
+		debugging_p($ele, "ele")	;
+
+		//update this record with new content.
+		/*
+		foreach($obj as $k=>$v){
+			if($k == 't' || $k == 'a' || $k == 'id'){
+				continue;	
+			}
+			if($v == "NULL"){
+				$v = null;	
+			}
+			$ele->$k = $v;	
+		}
+		*/
+		$ele->SO_LUONG = $obj['SO_LUONG'];
+		
+		debugging_p($ele, "ele after update new content")	;
+		
+		$ok = $ele->Save();
+		
+		debugging_p($ele, "ele after saved")	;
+		if(!$ok){
+			debugging($ele->ErrorMsg(), "ele->ErrorMsg()");
+			//error_log($ele->ErrorMsg());
+			return $this->findError($ele->ErrorMsg());		
+		}
+		
+		return $ele->SO_LUONG;
+	}
+		
 	public function addElement($table,$obj){
+		
+		if ($table == "NhuCauTuyenDung") {
+			return $this->addElementMultiPrimaryKey($table,$obj);
+		}
+		
+		
 		$ele = new $table();
 		$PrimaryKeyName = $ele->PrimaryKeyName();
 		
 		if(!empty($obj[$PrimaryKeyName])){
 			//echo('asd');
-			$ele->Load($PrimaryKeyName.' = ?',array($obj[$PrimaryKeyName]));	
+			//debugging("$obj[$PrimaryKeyName]", $obj[$PrimaryKeyName]);
+			$ele->Load($PrimaryKeyName.' = ?',array($obj[$PrimaryKeyName]));
+			
+			//debugging("$ele", $ele)	;
 		}
+		//debugging("ele ", $ele);
 		//print_r($ele);
 		foreach($obj as $k=>$v){
 			if($k == $PrimaryKeyName || $k == 't' || $k == 'a'){
@@ -306,6 +386,7 @@ class BaseService{
 		return $ele;
 		*/
 	}
+		
 	
 	public function deleteElement($table,$id){
 		$ele = new $table();
@@ -414,7 +495,7 @@ class BaseService{
 	//functions for table NHU_CAU_TUYEN_DUNG
 	
 	public function getNhuCauTuyenDung($year, $month){
-		debugging("getNhuCauTuyenDung");
+		//debugging("getNhuCauTuyenDung");
 		//init arr cells
 		$boPhan_LoaiNgayArray = $this->getDB()->GetAll("
 		SELECT LOAI_NGAY.MA as MA_LOAI_NGAY, BO_PHAN.MA as MA_BP
@@ -465,7 +546,7 @@ class BaseService{
 		WHERE YEAR(TU_NGAY) = 2013 AND MONTH(TU_NGAY)= 8 
 			AND MA_CN = CHI_NHANH.MA AND MA_CA = CA.MA 
 		");
-		debugging_p($nhuCauTuyenDungArray, "nhuCauTuyenDungArray");
+		//debugging_p($nhuCauTuyenDungArray, "nhuCauTuyenDungArray");
 		
 		foreach($nhuCauTuyenDungArray as $nhuCauTuyenDung) {
 			$arr[$nhuCauTuyenDung['NAME_FIRST_COLUMN']][$nhuCauTuyenDung['LOAI_NGAY'].' - '.$nhuCauTuyenDung['MA_BP']]['SO_LUONG'] = $nhuCauTuyenDung['SO_LUONG'];
@@ -473,5 +554,5 @@ class BaseService{
 		//debugging_p($arr,"arr return from getNhuCauTuyenDung");
 		return $arr;
 	}
-		
+	
 }

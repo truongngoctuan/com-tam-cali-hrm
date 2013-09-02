@@ -226,4 +226,8 @@ class NhanVien extends BaseDateVN {
 
 class NhuCauTuyenDung extends BaseDateVN {
 	var $_table = 'NHU_CAU_TUYEN_DUNG';
+	public function PrimaryKeyName(){
+		//return 'id';
+		return array('MA_CA', 'MA_CN', 'MA_BP', 'LOAI_NGAY', 'TU_NGAY');
+	}
 }
