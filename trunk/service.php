@@ -55,12 +55,15 @@ if($action == 'get'){
 		$ret['status'] = "ERROR";
 	}
 }else if($action == 'add'){
-	$ret['object'] = $baseService->addElement($_REQUEST['t'],$_REQUEST);
+	$ret['object'] = $baseService->addElement($_REQUEST['t'],$_REQUEST);	
+	
 	if(!empty($ret['object'])){
 		$ret['status'] = "SUCCESS";	
 	}else{
 		$ret['status'] = "ERROR";
 	}	
+}else if($action == 'editable'){
+	$ret = $baseService->addElementMultiPrimaryKey($_REQUEST['t'],$_REQUEST);	
 	
 }else if($action == 'delete'){
 	$ret['object'] = $baseService->deleteElement($_REQUEST['t'],$_REQUEST['id']);
