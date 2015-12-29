@@ -1,0 +1,1 @@
+This is about a software that can manage the whole HRM process.
